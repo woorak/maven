@@ -26,7 +26,11 @@ pipeline {
             steps {
                 // Publish the built artifact to a repository or server
                 // Replace the destination with your own
-                sh 'echo cp target/your-artifact.jar /path/to/destination'
+                sh """
+                    ls -l target
+                    echo cp target/your-artifact.jar /path/to/destination
+
+                    """
             }
         }
     }
