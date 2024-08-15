@@ -1,5 +1,11 @@
 pipeline {
-    agent any
+    
+    agent  {
+        docker {
+            image '3-amazoncorretto-17⁠'
+            args '-v /root/.m2:/root/.m2' // Mount the local Maven repository to cache dependencies
+        }
+    }
     
     stages {
         stage('Checkout') {
