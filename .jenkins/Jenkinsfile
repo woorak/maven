@@ -5,11 +5,6 @@ pipeline {
             args '-v /Users/russellanson/.m2:/root/.m2'
         }
     }
-    environment {
-        VER = 1.0
-        //MVN_CREDS = credentials('mvn_creds')
-    }
-    
     stages {
         stage('Checkout') {
             steps {
