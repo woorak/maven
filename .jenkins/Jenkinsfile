@@ -1,11 +1,37 @@
+pipeline {
+    agent  {
+        docker {
+            image 'maven:3.9.8-eclipse-temurin-17'
+            args '-v /Users/russellanson/.m2:/root/.m2'
+        }
+    }
+    environment {
+        MVN_CREDS = credentials('mvn_creds')
+    }
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/woorak/maven.git'
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                sh '''
+                    mvn clean package -Dserver_username=$MVN_CREDS_USR -Dserver_password=$MVN_CREDS_PSW
+                '''
+            }
+        }
+        
+        stage('Publish') {
+            steps {
+                sh """
+                    ls -l target
+                    echo cp target/your-artifact.jar /path/to/destination
 
-    
-    
-    
-                docker.image('maven:3.9.8-eclipse-temurin-11').inside {
-                    git branch: 'main', url: 'https://github.com/woorak/maven.git'
-                    sh """
-                        mvn -B clean package
-                        ls -l target
                     """
-                }
+            }
+        }
+    }
+}
