@@ -1,36 +1,15 @@
 pipeline {
-    agent  {
-        docker {
-            image '3-amazoncorretto-17'
-            args '-v /Users/russellanson/.m2:/root/.m2'
-        }
-    }
+    
     
     stages {
-        stage('Checkout') {
-            steps {
-                // Checkout your source code from version control
-                // Replace the URL and credentials with your own
-                git branch: 'main', url: 'https://github.com/woorak/maven.git'
-            }
-        }
+   
         
         stage('Build') {
             steps {
-                // Build your Maven project
-                sh 'mvn clean package'
-            }
-        }
-        
-        stage('Publish') {
-            steps {
-                // Publish the built artifact to a repository or server
-                // Replace the destination with your own
-                sh """
-                    ls -l target
-                    echo cp target/your-artifact.jar /path/to/destination
-
-                    """
+                docker.image('maven:3.3.3-jdk-8').inside {
+                    git branch: 'main', url: 'https://github.com/woorak/maven.git'
+                    sh 'mvn -B clean package'
+                }
             }
         }
     }
