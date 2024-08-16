@@ -26,6 +26,7 @@ pipeline {
                 sh """
                     mvn clean package -Dserver_username=$serverUsername -Dserver_password=$serverPassword
                 """
+                }
             }
         }
         
