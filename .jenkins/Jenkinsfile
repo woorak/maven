@@ -6,6 +6,7 @@ pipeline {
         }
     }
     environment {
+        VER = 1.0
         //MVN_CREDS = credentials('mvn_creds')
     }
     
