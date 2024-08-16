@@ -5,6 +5,9 @@ pipeline {
             args '-v /Users/russellanson/.m2:/root/.m2'
         }
     }
+    environment {
+        MVN_CREDS = credentials('mvn_creds')
+    }
     
     stages {
         stage('Checkout') {
@@ -17,16 +20,11 @@ pipeline {
         
         stage('Build') {
             steps {
-                 withCredentials([
-                    string(credentialsId: 'JKSPassword', variable: 'JKSPassword'),
-                    string(credentialsId: 'mvn_username', variable: 'serverUsername'),
-                    string(credentialsId: 'mvn_password', variable: 'serverPassword')
-                ]) {
                 // Build your Maven project
-                sh """
-                    mvn clean package -Dserver_username=$serverUsername -Dserver_password=$serverPassword
-                """
-                }
+                variable serverUsername = $
+                sh '''
+                    mvn clean package -Dserver_username=$MVN_CREDS_USR -Dserver_password=$MVN_CREDS_PSW
+                '''
             }
         }
         
