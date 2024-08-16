@@ -19,8 +19,8 @@ pipeline {
             steps {
                  withCredentials([
                     string(credentialsId: 'JKSPassword', variable: 'JKSPassword'),
-                    string(credentialsId: 'serverUsername', variable: 'serverUsername'),
-                    string(credentialsId: 'serverPassword', variable: 'serverPassword')
+                    string(credentialsId: 'mvn_username', variable: 'serverUsername'),
+                    string(credentialsId: 'mvn_password', variable: 'serverPassword')
                 ]) {
                 // Build your Maven project
                 sh """
