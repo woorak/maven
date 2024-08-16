@@ -1,4 +1,4 @@
-pipeline {
+
     
     
     
@@ -6,4 +6,3 @@ pipeline {
                     git branch: 'main', url: 'https://github.com/woorak/maven.git'
                     sh 'mvn -B clean package'
                 }
-}
