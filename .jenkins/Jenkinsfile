@@ -12,30 +12,15 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Checkout your source code from version control
-                // Replace the URL and credentials with your own
                 git branch: 'main', url: 'https://github.com/woorak/maven.git'
             }
         }
         
         stage('Build') {
             steps {
-                // Build your Maven project
                 sh '''
                     mvn clean package -Dserver_username=$MVN_CREDS_USR -Dserver_password=$MVN_CREDS_PSW
                 '''
-            }
-        }
-        
-        stage('Publish') {
-            steps {
-                // Publish the built artifact to a repository or server
-                // Replace the destination with your own
-                sh """
-                    ls -l target
-                    echo cp target/your-artifact.jar /path/to/destination
-
-                    """
             }
         }
     }
