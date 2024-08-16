@@ -7,5 +7,9 @@
                     sh """
                         mvn -B clean package
                         ls -l target
+                        mkdir -p sipgateway-server/src/rpm/data/others/vnejre/linux
+                        curl -LO https://corretto.aws/downloads/latest/amazon-corretto-17-x64-linux-jdk.tar.gz
+                        mv amazon-corretto-17-x64-linux-jdk.tar.gz sipgateway-server/src/rpm/data/others/vnejre/linux/jre.tar.gz
+                        find sipgateway-server
                     """
                 }
