@@ -21,7 +21,6 @@ pipeline {
         stage('Build') {
             steps {
                 // Build your Maven project
-                variable serverUsername = $
                 sh '''
                     mvn clean package -Dserver_username=$MVN_CREDS_USR -Dserver_password=$MVN_CREDS_PSW
                 '''
