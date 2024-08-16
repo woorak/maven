@@ -1,16 +1,9 @@
 pipeline {
     
     
-    stages {
-   
-        
-        stage('Build') {
-            steps {
+    
                 docker.image('maven:3.3.3-jdk-8').inside {
                     git branch: 'main', url: 'https://github.com/woorak/maven.git'
                     sh 'mvn -B clean package'
                 }
-            }
-        }
-    }
 }
