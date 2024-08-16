@@ -17,8 +17,15 @@ pipeline {
         
         stage('Build') {
             steps {
+                 withCredentials([
+                    string(credentialsId: 'JKSPassword', variable: 'JKSPassword'),
+                    string(credentialsId: 'serverUsername', variable: 'serverUsername'),
+                    string(credentialsId: 'serverPassword', variable: 'serverPassword')
+                ]) {
                 // Build your Maven project
-                sh 'mvn clean package'
+                sh """
+                    mvn clean package -Dserver_username=$serverUsername -Dserver_password=$serverPassword
+                """
             }
         }
         
