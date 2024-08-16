@@ -1,23 +1,11 @@
-pipeline {
-    agent  {
-        docker {
-            image 'maven'
-            args '-v /Users/russellanson/.m2:/root/.m2'
-        }
-    }
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/woorak/maven.git'
-            }
-        }
-        
-        stage('Build') {
-            steps {
-                sh '''
-                    mvn clean package
-                '''
-            }
-        }
-    }
-}
+
+    
+    
+    
+                docker.image('maven:3.9.8-eclipse-temurin-11').inside {
+                    git branch: 'main', url: 'https://github.com/woorak/maven.git'
+                    sh """
+                        mvn -B clean package
+                        ls -l target
+                    """
+                }
