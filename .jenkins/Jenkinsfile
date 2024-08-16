@@ -6,7 +6,7 @@ pipeline {
         }
     }
     environment {
-        MVN_CREDS = credentials('mvn_creds')
+        //MVN_CREDS = credentials('mvn_creds')
     }
     
     stages {
@@ -19,7 +19,6 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                    echo mvn clean package -Dserver_username=$MVN_CREDS_USR -Dserver_password=$MVN_CREDS_PSW
                     mvn clean package
                 '''
             }
